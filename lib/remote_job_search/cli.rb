@@ -18,6 +18,7 @@ class RemoteJobSearch::CLI
 
   def list_jobs
     puts "Choose job title for more information"
+    # @jobs = RemoteJobSearch::Job.category
   end
 
   def menu
@@ -25,8 +26,10 @@ class RemoteJobSearch::CLI
     while input != "exit"
       puts "Enter the number of the category you'd like to see jobs for or type list to see the categories again or type exit:"
       input = gets.strip.downcase
+
       if input.to_i > 0
-        puts @jobs[input.to_i-1]
+        job = @jobs[input.to_i-1]
+        puts "#{job.category}"
       elsif input == "list"
         list_categories
       else
