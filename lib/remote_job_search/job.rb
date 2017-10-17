@@ -1,5 +1,17 @@
 class RemoteJobSearch::Job
-attr_accessor :category
+
+  attr_accessor :category, :status, :company, :title, :date
+
+  @@all = []
+
+  def initialize(job_hash)
+    job_hash.each {|key, value| self.send(("#{key}="), value)}
+    @all << self
+  end
+
+  def self.all
+    @@all
+  end
 
   def self.category
     self.scrape_categories
@@ -13,10 +25,4 @@ attr_accessor :category
     job_categories
   end
 
-  def self.scrape_wework
-    doc = Nokogiri::HTML(open("https://weworkremotely.com/"))
-    job = self.new
-    job.category = doc.css("h2 a").first.text
-    job
-  end
 end
