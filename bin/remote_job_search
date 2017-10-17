@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/remote_job_search'
+
+RemoteJobSearch::CLI.new.call
