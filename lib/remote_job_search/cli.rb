@@ -11,6 +11,9 @@ class RemoteJobSearch::CLI
   def list_categories
     puts "Enter a job category:"
     @jobs = RemoteJobSearch::Job.category
+    @jobs.each.with_index(1) do |job, i|
+      puts "#{i}. #{job.category}"
+    end
   end
 
   def list_jobs
@@ -22,15 +25,12 @@ class RemoteJobSearch::CLI
     while input != "exit"
       puts "Enter the number of the category you'd like to see jobs for or type list to see the categories again or type exit:"
       input = gets.strip.downcase
-      case input
-        when "1"
-          puts "list jobs for category 1..."
-        when "2"
-          puts "list jobs for category 2..."
-        when "list"
-          list_categories
-        else
-          puts "Not a valid entry, type list or exit"
+      if input.to_i > 0
+        puts @jobs[input.to_i-1]
+      elsif input == "list"
+        list_categories
+      else
+        puts "Not a valid entry, type list or exit "
       end
     end
   end
