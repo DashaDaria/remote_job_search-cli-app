@@ -3,13 +3,18 @@ class RemoteJobSearch::CLI
 
   def call
     list_categories
+    list_jobs
     menu
     goodbye
   end
 
   def list_categories
     puts "Enter a job category:"
-    @jobs = RemoteJobSearch::Job.this_week
+    @jobs = RemoteJobSearch::Job.category
+  end
+
+  def list_jobs
+    puts "Choose job title for more information"
   end
 
   def menu
