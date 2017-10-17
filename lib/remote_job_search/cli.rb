@@ -18,7 +18,6 @@ class RemoteJobSearch::CLI
 
   def list_jobs
     puts "Choose job title for more information"
-    # @jobs = RemoteJobSearch::Job.category
   end
 
   def menu
