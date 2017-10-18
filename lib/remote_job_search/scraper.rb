@@ -1,6 +1,6 @@
 class RemoteJobSearch::Scraper
 
-
+#ALL CATEGORIES
   def self.categories_scraper
     #Returns an array of all job categories as strings
     homepage = Nokogiri::HTML(open("https://weworkremotely.com"))
@@ -13,57 +13,38 @@ class RemoteJobSearch::Scraper
     scraped_categories
   end
 
-def self.jobs_scraper_programming
-  #returns a collection of hashes with all job details information
-  programming_homepage = Nokogiri::HTML(open("https://weworkremotely.com/categories/2-programming/jobs#intro"))
 
-  scraped_jobs = []
-    programming_homepage.css("li.feature").each do |job_outline|
+#PROGRAMMING CATEGORY
+  def self.jobs_scraper_programming
+    #returns a collection of hashes with all job details information
+    #example of the return value:
+   #  {:title=>"Enjin Sr. Java SDK Developer",
+   #  :company=>"Enjin Pte Ltd",
+   #  :date=>"Oct 18",
+   #  :url=>"https://weworkremotely.com/jobs/5565-enjin-sr-java-sdk-developer"},
+   # {:title=>"Mobile Developer (Java and iOS)",
+   #  :company=>"codelathe",
+   #  :date=>"Oct 18",
+   #  :url=>"https://weworkremotely.com/jobs/5564-mobile-developer-java-and-ios"},
+    programming_homepage = Nokogiri::HTML(open("https://weworkremotely.com/categories/2-programming/jobs#intro"))
+    scraped_jobs = []
 
-    job = {
-      :title => job_outline.css("a span.title").text,
-      :company => job_outline.css("a span.company").text,
-      :date => job_outline.css("a span.date").text,
-      :url => "https://weworkremotely.com#{job_outline.css("a").attribute("href").value}"
-      }
-    scraped_jobs << job
-    end
-    binding.pry
-    scraped_jobs
- end
-  #
-  # def job_details_scraper
-  #   programming_job_page = Nokogiri::HTML(open(job_info[:url]))
-  #   job_info[:details] = programming_job_page.css("div.listing-container").text
-  #   job_info[:apply_link] = programming_job_page.css("div.apply p a").attribute("href").value
-  #
-  #   binding.pry
+      programming_homepage.css("li.feature").each do |job_outline|
+      job = {
+        :title => job_outline.css("a span.title").text,
+        :company => job_outline.css("a span.company").text,
+        :date => job_outline.css("a span.date").text,
+        :url => "https://weworkremotely.com#{job_outline.css("a").attribute("href").value}"
+        }
+      scraped_jobs << job
+      end
+      scraped_jobs
+   end
 
-#   end
-# end
-
-  # def self.homepage_scraper
-  #   homepage = Nokogiri::HTML(open("https://weworkremotely.com"))
-  #
-  #   category_with_jobs = {}
-  #   homepage.css("article").each do |job_category|
-  #     title = job_category.css("h2 a").text
-  #
-  #     job = {
-  #       # :category => job_category.css("h2 a").text,
-  #       :company => job_category.css("ul li a span.company").text,
-  #       :title => job_category.css("ul li a span.title").text,
-  #       :date => job_category.css("ul li a span.date").text,
-  #       :url => "https://weworkremotely.com#{job_category.css("li a").attribute("href").value}"
-  #     }
-  #     scraped_jobs_array << job
-  #
-  #     job_page = Nokogiri::HTML(open(job[:url]))
-  #       job[:details] = job_page.css("div.listing-container").text
-  #       job[:apply_link] = job_page.css("div.apply p a").attribute("href").value
-  #
-  #       scraped_jobs_array << job
-  #       binding.pry
-  #   end
-  #   scraped_jobs_array
+#ADDITIONAL JOB DETAILS
+   def job_details_scraper(job_page_url)
+     scraped_jobs = self.jobs_scraper_programming
+     job_page = Nokogiri::HTML(open(job_page_url))
+          binding.pry
+   end
 end

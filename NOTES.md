@@ -23,3 +23,40 @@ Program Architecture
 
 ? Who is responsible for outputting job information that is only 1 week old?
     - Should the scraper class only pull info 1 week old or should the job class have a method that filters the job instances by date?
+
+From Scraper:
+    #
+    # def job_details_scraper
+    #   programming_job_page = Nokogiri::HTML(open(job_info[:url]))
+    #   job_info[:details] = programming_job_page.css("div.listing-container").text
+    #   job_info[:apply_link] = programming_job_page.css("div.apply p a").attribute("href").value
+    #
+    #   binding.pry
+
+    #   end
+    # end
+
+    # def self.homepage_scraper
+    #   homepage = Nokogiri::HTML(open("https://weworkremotely.com"))
+    #
+    #   category_with_jobs = {}
+    #   homepage.css("article").each do |job_category|
+    #     title = job_category.css("h2 a").text
+    #
+    #     job = {
+    #       # :category => job_category.css("h2 a").text,
+    #       :company => job_category.css("ul li a span.company").text,
+    #       :title => job_category.css("ul li a span.title").text,
+    #       :date => job_category.css("ul li a span.date").text,
+    #       :url => "https://weworkremotely.com#{job_category.css("li a").attribute("href").value}"
+    #     }
+    #     scraped_jobs_array << job
+    #
+    #     job_page = Nokogiri::HTML(open(job[:url]))
+    #       job[:details] = job_page.css("div.listing-container").text
+    #       job[:apply_link] = job_page.css("div.apply p a").attribute("href").value
+    #
+    #       scraped_jobs_array << job
+    #       binding.pry
+    #   end
+    #   scraped_jobs_array
