@@ -1,26 +1,24 @@
 class RemoteJobSearch::Job
 
-  attr_accessor :title, :date, :company
+  attr_accessor :title, :company, :date, :url, :details, :apply_link, :category
 
+    @@all = []
 
+    def initialize(category, details)
+      details.each do |details_name, details_value|
+        self.send {(("#{details_name}="), details_value)}
 
+      @category = category
+      @@all << self
+    end
 
+    def self.all
+      @@all
+    end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def self.print_all
+      all.each.with_index(1) do |job, index|
+        puts "#{i}. #{job.title}"
 
 end
 

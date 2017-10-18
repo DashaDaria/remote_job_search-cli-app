@@ -16,15 +16,6 @@ class RemoteJobSearch::CLI
     end
   end
 
-
-  # def list_categories
-  #   #expectation: scrape weworkremotely index page and list out all job categories that are available.
-  #   puts "Enter a job category:"
-  #   @jobs = RemoteJobSearch::Job.category
-  #   @jobs.each.with_index(1) do |job, i|
-  #     puts "#{i}. #{job.category}"
-  #   end
-  # end
   #
   # def list_jobs
   #   #expectation: scrape weworkremotely
