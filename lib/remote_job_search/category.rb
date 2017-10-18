@@ -6,7 +6,22 @@ class RemoteJobSearch::Category
 
 attr_accessor :name, :jobs
 
-@@all = []
+    @@all = []
 
+    def initialize(name)
+      @name = name
+      @jobs = []
+      @@all << self
+    end
+
+    def self.all
+      @@all
+    end
+
+    def add_job(job)
+    job.category = self unless job.category
+    @jobs << job unless @jobs.include?(job)
+    @jobs
+  end
 
 end

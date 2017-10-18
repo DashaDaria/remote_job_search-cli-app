@@ -4,6 +4,14 @@ class RemoteJobSearch::Job
 
     @@all = []
 
+    def initialize(title, category = nil)
+      @title = title
+      self.category = category if category
+    end
+
+    def self.all
+      @@all
+    end
 
 
 #   def initialize(job_hash)
