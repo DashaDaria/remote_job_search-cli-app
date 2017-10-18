@@ -8,22 +8,5 @@ attr_accessor :name, :jobs
 
 @@all = []
 
-  def initialize(name, jobs_array)
-    @name = name
-    @jobs = jobs_array.collect do |job_details|
-      Job.new(self, job_attributes)
-    end
 
-    @@all << self
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.print_all
-    all.each.with_index(1) do |category, i|
-      puts "#{i}. #{category.name}"
-    end
-  end
 end
