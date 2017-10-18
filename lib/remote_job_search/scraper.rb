@@ -1,20 +1,22 @@
 class RemoteJobSearch::Scraper
 
-  def self.scrape_index_page
-    doc = Nokogiri::HTML(open("https://weworkremotely.com"))
-
-    jobs = []
-
-    doc.css("article").each do |job|
-      hash = {
-        :category => job.css("h2 a").text,
-        :status => job.css("ul li span.new").text,
-        :company => job.css("ul li a span.company").text,
-        :title => job.css("ul li a span.title").text,
-        :date => job.css("ul li a span.date").text
+  def self.job_scraper
+    homepage = Nokogiri::HTML(open("https://weworkremotely.com"))
+    homepage.css("section").collect do |job_category|
+      job = {
+        :category => job_category.css("h2 a").text,
+        :status => job_category.css("ul li span.new").text,
+        :company => job_category.css("ul li a span.company").text,
+        :title => job_category.css("ul li a span.title").text,
+        :date => job_category.css("ul li a span.date").text
+        :url =>
       }
-      jobs << hash
+
+      job_page = Nokogiri::HTML(open(jobs[:url]))
+        job[:details] =
+        job[:apply_link] =
+
+        job
     end
-    jobs
   end
 end

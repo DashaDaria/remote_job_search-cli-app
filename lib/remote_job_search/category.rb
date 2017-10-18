@@ -4,6 +4,7 @@ class RemoteJobSearch::Category
 # want categories to know about jobs and jobs to know about thier categories
 # Categories have many jobs, a job has one category
 
+attr_accessor :jobs
 
 
 
