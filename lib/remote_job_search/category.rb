@@ -1,3 +1,4 @@
+class InvalidType < StandardError; end
 class RemoteJobSearch::Category
 
 #expectation: a class that creates category instances that belong to jobs
@@ -18,10 +19,16 @@ attr_accessor :name, :jobs
       @@all
     end
 
-    def add_job(job)
-    job.category = self unless job.category
-    @jobs << job unless @jobs.include?(job)
-    @jobs
-  end
+    def job
+      @jobs.dup.freeze
+    end
 
+    def add_job(job)
+      if !job.is_a?(RemoteJobSearch::Job)
+        raise InvalidType, "must be a Job"
+      else
+      @jobs << job
+    end
+  end
+binding.pry
 end

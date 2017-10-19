@@ -1,17 +1,7 @@
 class RemoteJobSearch::Job
 
-  attr_accessor :title, :company, :date, :url, :details, :apply_link, :category
+  attr_accessor :title, :company, :date, :url
 
-    @@all = []
-
-    def initialize(title, category = nil)
-      @title = title
-      self.category = category if category
-    end
-
-    def self.all
-      @@all
-    end
 
 
 #   def initialize(job_hash)
