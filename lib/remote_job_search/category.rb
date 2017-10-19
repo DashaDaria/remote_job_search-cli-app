@@ -30,5 +30,5 @@ attr_accessor :name, :jobs
       @jobs << job
     end
   end
-binding.pry
+# binding.pry
 end

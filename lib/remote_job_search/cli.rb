@@ -2,11 +2,19 @@
 class RemoteJobSearch::CLI
 
   def call
+    create_categories
     list_categories
     # list_jobs
     # menu
     # goodbye
   end
+
+
+
+  def create_categories
+    
+  end
+
 
   def list_categories
     puts "Enter a job category you'd like to see remote job opportunities for:"
