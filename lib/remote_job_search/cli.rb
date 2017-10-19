@@ -1,28 +1,36 @@
 #CLI Controller - responsible for user interaction
 class RemoteJobSearch::CLI
+  attr_accessor :category, :name, :jobs
 
   def call
-    create_categories
     list_categories
     # list_jobs
     # menu
     # goodbye
   end
 
-
-
-  def create_categories
-    
-  end
-
-
-  def list_categories
-    puts "Enter a job category you'd like to see remote job opportunities for:"
-    @categories = RemoteJobSearch::Scraper.categories_scraper
-    @categories.each.with_index(1) do |category, i|
-      puts "#{i}. #{category}"
+    def list_categories
+      category_names = RemoteJobSearch::Scraper.categories_scraper
+      @category_objects = []
+      category_names.each do |category_name|
+      new_object = RemoteJobSearch::Category.new(category_name)
+      @category_objects << new_object
+    end
+      puts "Enter a job category you'd like to see remote job opportunities for:"
+      @category_objects.each.with_index(1) do |category, i|
+        puts "#{i}. #{category.name}"
     end
   end
+
+
+
+  # def list_categories
+  #   puts "Enter a job category you'd like to see remote job opportunities for:"
+  #   @categories = RemoteJobSearch::Scraper.categories_scraper
+  #   @categories.each.with_index(1) do |category, i|
+  #     puts "#{i}. #{category}"
+  #   end
+  # end
 
   #
   # def list_jobs

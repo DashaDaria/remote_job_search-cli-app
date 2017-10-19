@@ -1,16 +1,19 @@
 class RemoteJobSearch::Scraper
 
+
+
 #ALL CATEGORIES
   def self.categories_scraper
     #Returns an array of all job categories as strings
     homepage = Nokogiri::HTML(open("https://weworkremotely.com"))
     scraped_categories = []
     homepage.css("h2 a").each do |job_category|
-      category_name = job_category.text.strip
+      category_name = job_category.text.strip.chomp(" Jobs")
       scraped_categories << category_name
     end
     scraped_categories.delete("")
     scraped_categories
+    # binding.pry
   end
 
 
