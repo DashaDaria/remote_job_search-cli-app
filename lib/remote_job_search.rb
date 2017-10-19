@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
+require 'colorize'
 
 require_relative "./remote_job_search/version"
 require_relative './remote_job_search/job'

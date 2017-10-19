@@ -27,10 +27,13 @@ class RemoteJobSearch::CLI
     end
 
     def list_design_jobs
+    puts "DESIGN JOBS".colorize(:red)
       RemoteJobSearch::Job.all.each.with_index(1) do |job, index|
-        puts "#{index}. #{job.title} - #{job.company} - date posted: #{job.date}"
-        puts "    More details: #{job.url}"
-        puts "------------------------------------------------------------------"
+        puts "------------------------------------------------------------------------------------------------".colorize(:green)
+        puts "#{index}. #{job.title}"
+        puts "   #{job.company} // posted: #{job.date}"
+        puts "   More details:" + " #{job.url}".colorize(:blue)
+        puts "------------------------------------------------------------------------------------------------".colorize(:green)
       end
     end
 
