@@ -18,6 +18,13 @@ attr_accessor :name, :jobs
       @@all
     end
 
+    def add_job(job)
+      @jobs << job
+      job.category = self unless job.category == self
+    end
+binding.pry
+
+
 
 # binding.pry
 end

@@ -9,14 +9,15 @@ class RemoteJobSearch::Scraper
     end
     scraped_categories.delete("")
     scraped_categories
+    #returns an array of category name strings
   end
 
   def self.job_scraper
-
     # CATEGORY 1: DESIGN
     design_category = Nokogiri::HTML(open("https://weworkremotely.com"))
     scraped_design = []
     design_category.css("section.jobs#category-1").each do |design_job|
+      
       design_job.css("ul li").each do |attributes|
         design_jobs = {
           :title => attributes.css("a span.title").text,
@@ -28,7 +29,7 @@ class RemoteJobSearch::Scraper
       end
     end
     scraped_design
-#The return value is an array of design jobs with job attributes
+#The return value is an array of design jobs with attributes hash
 end
 
 

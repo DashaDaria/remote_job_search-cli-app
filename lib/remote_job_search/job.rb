@@ -21,6 +21,11 @@ class RemoteJobSearch::Job
       RemoteJobSearch::Job.new(job)
     end
   end
+
+  def category=(category)
+    @category = category
+    category.add_job(self) unless category.jobs.include?(self)
+  end
   # binding.pry
 
 #   def initialize(job_hash)
