@@ -4,17 +4,22 @@ class RemoteJobSearch::Job
 
   @@all = []
 
-  def initialize(title, company, date, url, category)
-    @title = title
-    @company = company
-    @date = date
-    @url = url
+  def initialize(category = nil, job_hash)
     @category = category
+    job_hash.each do |job_key, job_value|
+      self.send(("#{job_key}="), job_value)
+    end
     @@all << self
   end
 
   def self.all
     @@all
+  end
+
+  def self.create_from_scrape(category = nil, design_job_hash)
+    design_job_hash.each do |job|
+      RemoteJobSearch::Job.new(job)
+    end
   end
   # binding.pry
 

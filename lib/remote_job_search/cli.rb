@@ -3,15 +3,13 @@ class RemoteJobSearch::CLI
 
   def call
     # list_categories
-    # menu
+    make_design_jobs
+    list_design_jobs
     # goodbye
   end
-
-  # def list_categories
-  # end
-
+  #
   #   def list_categories
-  #     category_names = RemoteJobSearch::Scraper.categories_scraper
+  #     category_names = RemoteJobSearch::Scraper.category_scraper
   #     @category_objects = []
   #     category_names.each do |category_name|
   #     new_object = RemoteJobSearch::Category.new(category_name)
@@ -22,7 +20,21 @@ class RemoteJobSearch::CLI
   #       puts "#{i}. #{category.name}"
   #   end
   # end
-  #
+
+    def make_design_jobs
+      design_job_hash = RemoteJobSearch::Scraper.job_scraper
+      RemoteJobSearch::Job.create_from_scrape("Design", design_job_hash)
+    end
+
+    def list_design_jobs
+      RemoteJobSearch::Job.all.each.with_index(1) do |job, index|
+        puts "#{index}. #{job.title} - #{job.company} - date posted: #{job.date}"
+        puts "    More details: #{job.url}"
+        puts "------------------------------------------------------------------"
+      end
+    end
+
+
   # def menu
   #   input
 

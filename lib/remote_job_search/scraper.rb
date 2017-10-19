@@ -28,7 +28,7 @@ class RemoteJobSearch::Scraper
       end
     end
     scraped_design
-    binding.pry
+#The return value is an array of design jobs with job attributes
 end
 
 
