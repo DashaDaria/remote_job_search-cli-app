@@ -1,5 +1,7 @@
 class RemoteJobSearch::Scraper
 
+
+
   def self.job_attributes_array
     job_attributes = [
       {

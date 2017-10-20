@@ -4,22 +4,31 @@ class RemoteJobSearch::Job
 
   @@all = []
 
-  def initialize(job_attributes_array)
-    job_attributes_array.each do |job_key, job_value|
+  def initialize(category_name, job_attributes)
+    @category_name = category_name
+    job_attributes.each do |job_key, job_value|
       self.send(("#{job_key}="), job_value)
     end
     @@all << self
   end
 
-  def self.create_from_scrape(job_attributes_array)
+  def self.create_from_scrape(category_name, job_attributes_array)
     job_attributes_array.each do |job|
-      RemoteJobSearch::Job.new(job)
+      new_job = RemoteJobSearch::Job.new(category_name, job)
+      new_job.save
     end
   end
 
   def self.all
     @@all
   end
+
+  def save
+    if !@@all.include?(self)
+      @@all << self
+    end
+  end
+
 
 end
 

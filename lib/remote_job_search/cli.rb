@@ -2,32 +2,41 @@
 class RemoteJobSearch::CLI
 
   def call
-    make_jobs
-    # make_jobs
+    welcome
+    make_categories
+    list_categories
     # list_categories
     # menu
   end
 
-    def make_jobs
-      jobs_array = RemoteJobSearch::Scraper.job_attributes_array
-      jobs = RemoteJobSearch::Job.create_from_scrape(jobs_array)
-      binding.pry
+    def welcome
+      puts "Welcome to your next remote job opportunity!"
+      puts "Enter a job category you'd like to see a list of jobs for:"
+      puts ""
     end
+
+    def make_categories
+      jobs_array = RemoteJobSearch::Scraper.job_attributes_array
+      programming = RemoteJobSearch::Category.new("Programming", jobs_array)
+      design = RemoteJobSearch::Category.new("Design", jobs_array)
+      all_other = RemoteJobSearch::Category.new("All Other", jobs_array)
+      customer_support = RemoteJobSearch::Category.new("Customer Support", jobs_array)
+      business = RemoteJobSearch::Category.new("Business", jobs_array)
+      devops = RemoteJobSearch::Category.new("DevOps", jobs_array)
+      marketing = RemoteJobSearch::Category.new("Marketing", jobs_array)
+      copywriting = RemoteJobSearch::Category.new("Copywriting", jobs_array)
+    end
+
+    def list_categories
+      RemoteJobSearch::Category.all.each.with_index(1) do |category, i|
+      puts "#{i}. #{category.category_name}"
+      end
+    end
+
+
+
 end
 
-
-#   def call
-#     welcome
-#     list_categories
-#     make_design_jobs
-#     menu
-#   end
-#
-#     def welcome
-#       puts "Welcome to your next remote job opportunity!"
-#       puts "Enter a job category you'd like to see a list of jobs for:"
-#       puts ""
-#     end
 #
 #     def list_categories
 #       category_names = RemoteJobSearch::Scraper.category_scraper
