@@ -3,18 +3,32 @@ class RemoteJobSearch::Scraper
   def self.job_attributes_array
     job_attributes = [
       {
-      :category_name => "design"  
+      :category_name=> "design",
+      :title=> "Teacher",
+      :company=> "Enjin",
+      :date=> "Oct 19",
+      :url=> "https://developer"},
+     {
+      :category_name=> "business",
       :title=>"Developer",
-      :company=>"Enjin",
+      :company=>"cothe",
+      :date=>"Oct 17",
+      :url=>"https://java"},
+      {
+      :category_name =>"design",
+      :title=>"UX/UI",
+      :company=>"jin",
+      :date=>"Oct 14",
+      :url=>"https://dev"},
+     {
+      :category_name =>"business",
+      :title=>"Manager",
+      :company=>"cod",
       :date=>"Oct 18",
-      :url=>"https://developer"},
-     {:category_name => "art"
-      :title=>"Mobile Developer",
-      :company=>"codelathe",
-      :date=>"Oct 18",
-      :url=>"https://java-and-ios"}
+      :url=>"https://ios"}
     ]
   end
+
 end
 #
 #   def self.category_scraper

@@ -1,15 +1,20 @@
 class RemoteJobSearch::Job
 
-  attr_accessor :title, :company, :date, :url, :category
+  attr_accessor :title, :company, :date, :url, :category_name
 
   @@all = []
 
-  def initialize(category, job_attributes)
-    @category = category
-    job_attributes.each do |job_key, job_value|
+  def initialize(job_attributes_array)
+    job_attributes_array.each do |job_key, job_value|
       self.send(("#{job_key}="), job_value)
     end
     @@all << self
+  end
+
+  def self.create_from_scrape(job_attributes_array)
+    job_attributes_array.each do |job|
+      RemoteJobSearch::Job.new(job)
+    end
   end
 
   def self.all

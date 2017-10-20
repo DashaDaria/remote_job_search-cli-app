@@ -1,22 +1,22 @@
-class RemoteJobSearch::Category
-
-  attr_accessor :name, :jobs
-
-  @@all = []
-
-  def initialize(jobs_attributes_array)
-    @name = name
-    @jobs = jobs_array.map do |job_attributes|
-      RemoteJobSearch::Job.new(self, job_attributes)
-    end
-    @@all << self
-  end
-
-  def self.all
-    @@all
-  end
-
-end
+# class RemoteJobSearch::Category
+#
+#   attr_accessor :category_name, :jobs
+#
+#   @@all = []
+#
+#   def initialize(category_name, job_attributes_array)
+#     @category_name = category_name
+#     @jobs = job_attributes_array.map do |job_attributes|
+#       RemoteJobSearch::Job.new(self, job_attributes)
+#     end
+#     @@all << self
+#   end
+#
+#   def self.all
+#     @@all
+#   end
+#
+# end
 
 
 # #expectation: a class that creates category instances that belong to jobs

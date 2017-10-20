@@ -2,16 +2,15 @@
 class RemoteJobSearch::CLI
 
   def call
-    make_categories
+    make_jobs
     # make_jobs
     # list_categories
     # menu
   end
 
-    def make_categories
-      category_names = RemoteJobSearch::Scraper.category_names_array
+    def make_jobs
       jobs_array = RemoteJobSearch::Scraper.job_attributes_array
-      categories = RemoteJobSearch::Category.new(category_names, jobs_array)
+      jobs = RemoteJobSearch::Job.create_from_scrape(jobs_array)
       binding.pry
     end
 end
