@@ -1,8 +1,6 @@
 # RemoteJobSearch
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/remote_job_search`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the Remote Job Search CLI App/Gem! The app allows you to browse remote job opportunities based on various job categories. The data is pulled from https://weworkremotely.com.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The program will present you with a list of various job categories. Follow the prompts to select your desired category and look through the details of available jobs.
 
 ## Development
 
