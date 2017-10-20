@@ -12,13 +12,6 @@ class RemoteJobSearch::Job
     @@all << self
   end
 
-  def self.create_from_scrape(category_name, job_attributes_array)
-    job_attributes_array.each do |job|
-      new_job = RemoteJobSearch::Job.new(category_name, job)
-      new_job.save
-    end
-  end
-
   def self.all
     @@all
   end
@@ -54,7 +47,12 @@ end
 #       RemoteJobSearch::Job.new(job)
 #     end
 #   end
-#
+#  # def self.create_from_scrape(category_name, job_attributes_array)
+  #   job_attributes_array.each do |job|
+  #     new_job = RemoteJobSearch::Job.new(category_name, job)
+  #     new_job.save
+  #   end
+  # end
 #   def category=(category)
 #     @category = category
 #     category.add_job(self) unless category.jobs.include?(self)

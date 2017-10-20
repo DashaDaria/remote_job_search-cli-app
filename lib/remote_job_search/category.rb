@@ -3,7 +3,7 @@ class RemoteJobSearch::Category
   attr_accessor :category_name, :jobs
 
   @@all = []
-#
+
   def initialize(category_name, jobs)
     @category_name = category_name
     @jobs = jobs.map do |job_attributes|
@@ -16,15 +16,16 @@ class RemoteJobSearch::Category
     @@all
   end
 
+  def self.find(input)
+    @@all[input.to_i-1]
+  end
+  
   def save
     if !@@all.include?(self)
       @@all << self
     end
   end
-
-  def self.find(input)
-    @@all[input.to_i-1]
-  end
+end
 
 # def create_from_scrape(attributes)
 #   category = self.new(need 1 string for name)
@@ -33,7 +34,6 @@ class RemoteJobSearch::Category
 #     job = Job.create_from_scrape(category, job)
 #     category.jobs << job
 #   end
-end
 #   def initialize(category_name, job_attributes_array)
 #     @category_name = category_name
 #     @jobs = job_attributes_array.map do |job_attributes|
