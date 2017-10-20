@@ -1,38 +1,55 @@
 class RemoteJobSearch::Scraper
 
-  def self.category_scraper
-    categories = Nokogiri::HTML(open("https://weworkremotely.com"))
-    scraped_categories = []
-      categories.css("h2 a").each do |job_category|
-      category_name = job_category.text.strip.chomp(" Jobs")
-      scraped_categories << category_name
-    end
-    scraped_categories.delete("")
-    scraped_categories
-    #returns an array of category name strings
+  def self.job_attributes_array
+    job_attributes = [
+      {
+      :category_name => "design"  
+      :title=>"Developer",
+      :company=>"Enjin",
+      :date=>"Oct 18",
+      :url=>"https://developer"},
+     {:category_name => "art"
+      :title=>"Mobile Developer",
+      :company=>"codelathe",
+      :date=>"Oct 18",
+      :url=>"https://java-and-ios"}
+    ]
   end
-
-  def self.job_scraper
-    # CATEGORY 1: DESIGN
-    design_category = Nokogiri::HTML(open("https://weworkremotely.com"))
-    scraped_design = []
-    design_category.css("section.jobs#category-1").each do |design_job|
-      
-      design_job.css("ul li").each do |attributes|
-        design_jobs = {
-          :title => attributes.css("a span.title").text,
-          :company => attributes.css("a span.company").text,
-          :date => attributes.css("a span.date").text,
-          :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-        }
-        scraped_design << design_jobs
-      end
-    end
-    scraped_design
-#The return value is an array of design jobs with attributes hash
 end
-
-
+#
+#   def self.category_scraper
+#     categories = Nokogiri::HTML(open("https://weworkremotely.com"))
+#     scraped_categories = []
+#       categories.css("h2 a").each do |job_category|
+#       category_name = job_category.text.strip.chomp(" Jobs")
+#       scraped_categories << category_name
+#     end
+#     scraped_categories.delete("")
+#     scraped_categories
+#     #returns an array of category name strings
+#   end
+#
+#   def self.job_scraper
+#     # CATEGORY 1: DESIGN
+#     design_category = Nokogiri::HTML(open("https://weworkremotely.com"))
+#     scraped_design = []
+#     design_category.css("section.jobs#category-1").each do |design_job|
+#
+#       design_job.css("ul li").each do |attributes|
+#         design_jobs = {
+#           :title => attributes.css("a span.title").text,
+#           :company => attributes.css("a span.company").text,
+#           :date => attributes.css("a span.date").text,
+#           :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#         }
+#         scraped_design << design_jobs
+#       end
+#     end
+#     scraped_design
+# #The return value is an array of design jobs with attributes hash
+# end
+#
+#
 
 
 # #ALL CATEGORIES
@@ -84,4 +101,4 @@ end
 #      job_page = Nokogiri::HTML(open(job_page_url))
 #           binding.pry
 #    end
-end
+# end
