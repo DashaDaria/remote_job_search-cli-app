@@ -5,8 +5,8 @@ class RemoteJobSearch::CLI
     welcome
     make_categories
     list_categories
-    # list_categories
-    # menu
+    menu
+    goodbye
   end
 
     def welcome
@@ -33,10 +33,44 @@ class RemoteJobSearch::CLI
       end
     end
 
+    def menu
+      @input = nil
+      while @input != "exit"
+        puts ""
+        puts "Type list to see the categories again or type exit."
+        @input = gets.strip.downcase
 
+        if @input.to_i.between?(1,8)
+          list_jobs_from_category
 
+        elsif @input == "list"
+          list_categories
+        elsif @input == "exit"
+          goodbye
+          exit
+        else
+          puts "Not a valid entry, type list or exit "
+        end
+      end
+    end
+
+    def list_jobs_from_category
+      selected_category = RemoteJobSearch::Category.find(@input)
+      # binding.pry
+      puts "#{selected_category.category_name}".colorize(:red)
+      selected_category.jobs.each.with_index(1) do |job, index|
+        puts "------------------------------------------------------------------------------------------------".colorize(:green)
+        puts "#{index}. #{job.title}"
+        puts "   #{job.company} // posted: #{job.date}"
+        puts "   More details:" + " #{job.url}".colorize(:blue)
+        puts "------------------------------------------------------------------------------------------------".colorize(:green)
+      end
+    end
+
+    def goodbye
+      puts "Come back tomorrow for more jobs!"
+    end
 end
-
 #
 #     def list_categories
 #       category_names = RemoteJobSearch::Scraper.category_scraper
@@ -51,67 +85,3 @@ end
 #     #Return value is an array of category objects -  #<RemoteJobSearch::Category:0x007faab51b0050 @jobs=[], @name="Design">
 #   end
 #
-#     def menu
-#       input = nil
-#       while input != "exit"
-#         puts ""
-#         puts "Type list to see the categories again or type exit."
-#         input = gets.strip.downcase
-#
-#               if input.to_i == 1
-#               puts "Business/Exec & Management".colorize(:red)
-#
-#               elsif input.to_i == 2
-#               puts  "Design".colorize(:red)
-#
-#               elsif input.to_i == 3
-#                 puts "Marketing".colorize(:red)
-#
-#               elsif input.to_i == 4
-#                 puts "Programming".colorize(:red)
-#
-#               elsif input.to_i == 5
-#                 puts "DevOps & Sysadmin".colorize(:red)
-#
-#               elsif input.to_i == 6
-#                 puts "All Other".colorize(:red)
-#
-#               elsif input.to_i == 7
-#                 puts "Customer Support".colorize(:red)
-#
-#               elsif input.to_i == 8
-#                 puts "Copywriting".colorize(:red)
-#
-#
-#         elsif input == "list"
-#           list_categories
-#         elsif input == "exit"
-#           goodbye
-#           exit
-#         else
-#           puts "Not a valid entry, type list or exit "
-#         end
-#       end
-#     end
-#
-#
-#     def make_design_jobs
-#       design_job_hash = RemoteJobSearch::Scraper.job_scraper
-#       RemoteJobSearch::Job.create_from_scrape("Design", design_job_hash)
-#     end
-#
-#     def list_design_jobs
-#     # puts "DESIGN JOBS".colorize(:red)
-#       RemoteJobSearch::Job.all.each.with_index(1) do |job, index|
-#         puts "------------------------------------------------------------------------------------------------".colorize(:green)
-#         puts "#{index}. #{job.title}"
-#         puts "   #{job.company} // posted: #{job.date}"
-#         puts "   More details:" + " #{job.url}".colorize(:blue)
-#         puts "------------------------------------------------------------------------------------------------".colorize(:green)
-#       end
-#     end
-#
-#     def goodbye
-#       puts "Come back tomorrow for more jobs!"
-#     end
-# end

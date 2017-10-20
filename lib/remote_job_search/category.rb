@@ -4,23 +4,27 @@ class RemoteJobSearch::Category
 
   @@all = []
 #
-def initialize(category_name, jobs)
-  @category_name = category_name
-  @jobs = jobs.map do |job_attributes|
-    RemoteJobSearch::Job.new(self, job_attributes)
-  end
-  @@all << self
-end
-
-def self.all
-  @@all
-end
-
-def save
-  if !@@all.include?(self)
+  def initialize(category_name, jobs)
+    @category_name = category_name
+    @jobs = jobs.map do |job_attributes|
+      RemoteJobSearch::Job.new(self, job_attributes)
+    end
     @@all << self
   end
-end
+
+  def self.all
+    @@all
+  end
+
+  def save
+    if !@@all.include?(self)
+      @@all << self
+    end
+  end
+
+  def self.find(input)
+    @@all[input.to_i-1]
+  end
 
 # def create_from_scrape(attributes)
 #   category = self.new(need 1 string for name)
