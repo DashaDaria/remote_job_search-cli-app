@@ -1,4 +1,4 @@
-#CLI Controller - responsible for user interaction
+# CLI Controller - responsible for user interaction
 class RemoteJobSearch::CLI
 
   def call
@@ -16,14 +16,15 @@ class RemoteJobSearch::CLI
   end
 
   def make_jobs
-    programming = RemoteJobSearch::Category.new("Programming", RemoteJobSearch::Scraper.programming_scrape)
-    design = RemoteJobSearch::Category.new("Design", RemoteJobSearch::Scraper.design_scrape)
-    all_other = RemoteJobSearch::Category.new("All Other", RemoteJobSearch::Scraper.all_other_scrape)
-    customer_support = RemoteJobSearch::Category.new("Customer Support", RemoteJobSearch::Scraper.customer_scrape)
-    business = RemoteJobSearch::Category.new("Business", RemoteJobSearch::Scraper.busi_scrape)
-    devops = RemoteJobSearch::Category.new("DevOps", RemoteJobSearch::Scraper.devops_scrape)
-    marketing = RemoteJobSearch::Category.new("Marketing", RemoteJobSearch::Scraper.marketing_scrape)
-    copywriting = RemoteJobSearch::Category.new("Copywriting", RemoteJobSearch::Scraper.copywriting_scrape)
+    RemoteJobSearch::Scraper.job_scrape
+  #   programming = RemoteJobSearch::Category.new("Programming", RemoteJobSearch::Scraper.programming_scrape)
+  # #   design = RemoteJobSearch::Category.new("Design", RemoteJobSearch::Scraper.design_scrape)
+  #   all_other = RemoteJobSearch::Category.new("All Other", RemoteJobSearch::Scraper.all_other_scrape)
+  #   customer_support = RemoteJobSearch::Category.new("Customer Support", RemoteJobSearch::Scraper.customer_scrape)
+  #   business = RemoteJobSearch::Category.new("Business", RemoteJobSearch::Scraper.busi_scrape)
+  #   devops = RemoteJobSearch::Category.new("DevOps", RemoteJobSearch::Scraper.devops_scrape)
+  #   marketing = RemoteJobSearch::Category.new("Marketing", RemoteJobSearch::Scraper.marketing_scrape)
+  #   copywriting = RemoteJobSearch::Category.new("Copywriting", RemoteJobSearch::Scraper.copywriting_scrape)
   end
 
   def list_categories
@@ -48,7 +49,7 @@ class RemoteJobSearch::CLI
       elsif @input == "exit"
         goodbye
         exit
-        
+
       else
         puts "Not a valid entry, type list or exit "
       end

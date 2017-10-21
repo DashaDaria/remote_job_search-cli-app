@@ -1,161 +1,171 @@
 class RemoteJobSearch::Scraper
-  
-def self.design_scrape
-  programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-    scraped = []
-      programming.css("section.jobs#category-1").each do |job|
-        job.css("ul li").each do |attributes|
-          jobs = {
-            :title => attributes.css("a span.title").text,
-            :company => attributes.css("a span.company").text,
-            :date => attributes.css("a span.date").text,
-            :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-          }
-          scraped << jobs
-        end
+
+  def self.job_scrape
+    programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+
+    programming.css("section.jobs").each do |category|
+      @category_name = category.css("h2 a").text.strip.chomp(" Jobs")
+      @jobs          = []
+
+      # h2 which is the name of the category
+      # you can instantiate the category
+      category.css("ul li").each do |attributes|
+        jobs = {
+          :title => attributes.css("a span.title").text,
+          :company => attributes.css("a span.company").text,
+          :date => attributes.css("a span.date").text,
+          :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+        }
+        @jobs << jobs
       end
-    scraped
-  end
-
-def self.programming_scrape
-  programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-    scraped = []
-      programming.css("section.jobs#category-2").each do |job|
-        job.css("ul li").each do |attributes|
-          jobs = {
-            :title => attributes.css("a span.title").text,
-            :company => attributes.css("a span.company").text,
-            :date => attributes.css("a span.date").text,
-            :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-          }
-          scraped << jobs
-        end
-      end
-    scraped
-  end
-
-def self.busi_scrape
-  programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-    scraped = []
-      programming.css("section.jobs#category-3").each do |job|
-        job.css("ul li").each do |attributes|
-          jobs = {
-            :title => attributes.css("a span.title").text,
-            :company => attributes.css("a span.company").text,
-            :date => attributes.css("a span.date").text,
-            :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-          }
-          scraped << jobs
-        end
-      end
-    scraped
-  end
-
-  def self.all_other_scrape
-    programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-      scraped = []
-        programming.css("section.jobs#category-4").each do |job|
-          job.css("ul li").each do |attributes|
-            jobs = {
-              :title => attributes.css("a span.title").text,
-              :company => attributes.css("a span.company").text,
-              :date => attributes.css("a span.date").text,
-              :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-            }
-            scraped << jobs
-          end
-        end
-      scraped
-    end
-  def self.copywriting_scrape
-    programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-      scraped = []
-        programming.css("section.jobs#category-5").each do |job|
-          job.css("ul li").each do |attributes|
-            jobs = {
-              :title => attributes.css("a span.title").text,
-              :company => attributes.css("a span.company").text,
-              :date => attributes.css("a span.date").text,
-              :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-            }
-            scraped << jobs
-          end
-        end
-      scraped
-    end
-  def self.devops_scrape
-    programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-      scraped = []
-        programming.css("section.jobs#category-6").each do |job|
-          job.css("ul li").each do |attributes|
-            jobs = {
-              :title => attributes.css("a span.title").text,
-              :company => attributes.css("a span.company").text,
-              :date => attributes.css("a span.date").text,
-              :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-            }
-            scraped << jobs
-          end
-        end
-      scraped
-    end
-  def self.customer_scrape
-    programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-      scraped = []
-        programming.css("section.jobs#category-7").each do |job|
-          job.css("ul li").each do |attributes|
-            jobs = {
-              :title => attributes.css("a span.title").text,
-              :company => attributes.css("a span.company").text,
-              :date => attributes.css("a span.date").text,
-              :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-            }
-            scraped << jobs
-          end
-        end
-      scraped
-    end
-  def self.marketing_scrape
-    programming = Nokogiri::HTML(open("https://weworkremotely.com"))
-      scraped = []
-        programming.css("section.jobs#category-9").each do |job|
-          job.css("ul li").each do |attributes|
-            jobs = {
-              :title => attributes.css("a span.title").text,
-              :company => attributes.css("a span.company").text,
-              :date => attributes.css("a span.date").text,
-              :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-            }
-            scraped << jobs
-          end
-        end
-      scraped
+      RemoteJobSearch::Category.new(@category_name, @jobs)
     end
   end
+        # jobs_by_category = RemoteJobSearch::Category.new(@category_name, @scraped)
+        # instantiate the job
+        # 2 way association between category and that job
 
+end
+
+# def self.programming_scrape
+#   programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#     scraped = []
+#       programming.css("section.jobs#category-2").each do |job|
+#         job.css("ul li").each do |attributes|
+#           jobs = {
+#             :title => attributes.css("a span.title").text,
+#             :company => attributes.css("a span.company").text,
+#             :date => attributes.css("a span.date").text,
+#             :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#           }
+#           scraped << jobs
+#         end
+#       end
+#     scraped
+#   end
 #
-# end
+# def self.busi_scrape
+#   programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#     scraped = []
+#       programming.css("section.jobs#category-3").each do |job|
+#         job.css("ul li").each do |attributes|
+#           jobs = {
+#             :title => attributes.css("a span.title").text,
+#             :company => attributes.css("a span.company").text,
+#             :date => attributes.css("a span.date").text,
+#             :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#           }
+#           scraped << jobs
+#         end
+#       end
+#     scraped
+#   end
+#
+#   def self.all_other_scrape
+#     programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#       scraped = []
+#         programming.css("section.jobs#category-4").each do |job|
+#           job.css("ul li").each do |attributes|
+#             jobs = {
+#               :title => attributes.css("a span.title").text,
+#               :company => attributes.css("a span.company").text,
+#               :date => attributes.css("a span.date").text,
+#               :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#             }
+#             scraped << jobs
+#           end
+#         end
+#       scraped
+#     end
+#   def self.copywriting_scrape
+#     programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#       scraped = []
+#         programming.css("section.jobs#category-5").each do |job|
+#           job.css("ul li").each do |attributes|
+#             jobs = {
+#               :title => attributes.css("a span.title").text,
+#               :company => attributes.css("a span.company").text,
+#               :date => attributes.css("a span.date").text,
+#               :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#             }
+#             scraped << jobs
+#           end
+#         end
+#       scraped
+#     end
+#   def self.devops_scrape
+#     programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#       scraped = []
+#         programming.css("section.jobs#category-6").each do |job|
+#           job.css("ul li").each do |attributes|
+#             jobs = {
+#               :title => attributes.css("a span.title").text,
+#               :company => attributes.css("a span.company").text,
+#               :date => attributes.css("a span.date").text,
+#               :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#             }
+#             scraped << jobs
+#           end
+#         end
+#       scraped
+#     end
+#   def self.customer_scrape
+#     programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#       scraped = []
+#         programming.css("section.jobs#category-7").each do |job|
+#           job.css("ul li").each do |attributes|
+#             jobs = {
+#               :title => attributes.css("a span.title").text,
+#               :company => attributes.css("a span.company").text,
+#               :date => attributes.css("a span.date").text,
+#               :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#             }
+#             scraped << jobs
+#           end
+#         end
+#       scraped
+#     end
+#   def self.marketing_scrape
+#     programming = Nokogiri::HTML(open("https://weworkremotely.com"))
+#       scraped = []
+#         programming.css("section.jobs#category-9").each do |job|
+#           job.css("ul li").each do |attributes|
+#             jobs = {
+#               :title => attributes.css("a span.title").text,
+#               :company => attributes.css("a span.company").text,
+#               :date => attributes.css("a span.date").text,
+#               :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+#             }
+#             scraped << jobs
+#           end
+#         end
+#       scraped
+#     end
+#   end
+#
 # #
-# #   def self.category_scraper
-# #     categories = Nokogiri::HTML(open("https://weworkremotely.com"))
-# #     scraped_categories = []
-# #       categories.css("h2 a").each do |job_category|
-# #       category_name = job_category.text.strip.chomp(" Jobs")
-# #       scraped_categories << category_name
-# #     end
-# #     scraped_categories.delete("")
-# #     scraped_categories
-# #     #returns an array of category name strings
-# #   end
-# #
-# #   def self.job_scraper
-# #     # CATEGORY 1: DESIGN
-# #     design_category = Nokogiri::HTML(open("https://weworkremotely.com"))
-# #     scraped_design = []
-# #     design_category.css("section.jobs#category-1").each do |design_job|
-# #
-# #       design_job.css("ul li").each do |attributes|
-# #         design_jobs = {
+# # end
+# # #
+# # #   def self.category_scraper
+# # #     categories = Nokogiri::HTML(open("https://weworkremotely.com"))
+# # #     scraped_categories = []
+# # #       categories.css("h2 a").each do |job_category|
+# # #       category_name = job_category.text.strip.chomp(" Jobs")
+# # #       scraped_categories << category_name
+# # #     end
+# # #     scraped_categories.delete("")
+# # #     scraped_categories
+# # #     #returns an array of category name strings
+# # #   end
+# # #
+# # #   def self.job_scraper
+# # #     # CATEGORY 1: DESIGN
+# # #     design_category = Nokogiri::HTML(open("https://weworkremotely.com"))
+# # #     scraped_design = []
+# # #     design_category.css("section.jobs#category-1").each do |design_job|
+# # #
+# # #       design_job.css("ul li").each do |attributes|
+# # #         design_jobs = {
 # #           :title => attributes.css("a span.title").text,
 # #           :company => attributes.css("a span.company").text,
 # #           :date => attributes.css("a span.date").text,

@@ -19,7 +19,7 @@ class RemoteJobSearch::Category
   def self.find(input)
     @@all[input.to_i-1]
   end
-  
+
   def save
     if !@@all.include?(self)
       @@all << self
