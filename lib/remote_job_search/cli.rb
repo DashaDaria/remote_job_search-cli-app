@@ -20,7 +20,7 @@ class RemoteJobSearch::CLI
 
   def list_categories
     RemoteJobSearch::Category.all.each.with_index(1) do |category, i|
-    puts "#{i}. #{category.category_name}"
+      puts "#{i}. #{category.category_name}"
     end
   end
 

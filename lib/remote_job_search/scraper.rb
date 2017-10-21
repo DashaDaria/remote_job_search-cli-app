@@ -8,12 +8,12 @@ class RemoteJobSearch::Scraper
       @jobs          = []
 
       category.css("ul li").each do |attributes|
-        jobs = {
-          :title => attributes.css("a span.title").text,
-          :company => attributes.css("a span.company").text,
-          :date => attributes.css("a span.date").text,
-          :url => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
-        }
+          jobs      = {
+          :title    => attributes.css("a span.title").text,
+          :company  => attributes.css("a span.company").text,
+          :date     => attributes.css("a span.date").text,
+          :url      => "https://weworkremotely.com#{attributes.css("a").attribute("href").value}"
+          }
         @jobs << jobs
       end
       RemoteJobSearch::Category.new(@category_name, @jobs)
