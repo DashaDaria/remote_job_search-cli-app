@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "remote_job_search"
+
+require_relative "../lib/remote_job_search"
 
 RemoteJobSearch::CLI.new.call

@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Remote Job Search}
   spec.description   = %q{Provides a user with remote job opportunities based on job category}
-  spec.homepage      = ""
+  spec.homepage      = "http://rubygems.org/gems/remote_job_search"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

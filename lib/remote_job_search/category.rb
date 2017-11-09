@@ -4,13 +4,16 @@ class RemoteJobSearch::Category
 
   @@all = []
 
-  def initialize(category_name, jobs)
+  def initialize(category_name)
     @category_name = category_name
-    @jobs = jobs.map do |job_attributes|
-      RemoteJobSearch::Job.new(self, job_attributes)
-    end
+    @jobs = []
     @@all << self
   end
+
+  def add_job(job)
+    @jobs << job
+  end
+
 
   def self.all
     @@all

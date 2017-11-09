@@ -21,4 +21,11 @@ class RemoteJobSearch::Job
       @@all << self
     end
   end
+
+  def self.search_title(keyword)
+    self.all.select do |job_instance|
+      job_instance.title.downcase.include?(keyword.downcase)    
+    end
+  end
+
 end

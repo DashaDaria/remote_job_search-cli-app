@@ -4,6 +4,7 @@ class RemoteJobSearch::CLI
   def call
     welcome
     make_jobs
+    binding.pry
     list_categories
     menu
     goodbye
